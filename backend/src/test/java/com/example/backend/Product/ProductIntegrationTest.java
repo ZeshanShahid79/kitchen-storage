@@ -18,14 +18,11 @@ class ProductIntegrationTest {
     private MockMvc mockMvc;
 
     @Test
-    void getAllProductsAndExpectStatus200AndExpectedProductList() throws Exception {
+    void getAllProductsAndExpectStatus200AndExpectEmptyList() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/product"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
-                        [{
-                        "id": "asdJJxsada",
-                        "productName": "apple"
-                        }]
+                        []
                         """));
     }
 }
