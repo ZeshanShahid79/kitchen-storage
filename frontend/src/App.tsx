@@ -1,25 +1,9 @@
-import axios from "axios";
-import {useEffect, useState} from "react";
-import {Product} from "./Product";
+import {useProducts} from "./useProducts.tsx";
+
 
 function App() {
-    const [products, setProducts] = useState<Product[]>([]);
 
-    useEffect(() => {
-        getProducts();
-    }, []);
-
-    function getProducts() {
-        axios
-            .get("/api/product")
-            .then(response => {
-                const responseData = response.data as Product[]
-                setProducts(responseData);
-            })
-            .catch(error => {
-                console.error("Error fetching products:", error);
-            });
-    }
+    const {products} = useProducts()
 
     return (
         <>

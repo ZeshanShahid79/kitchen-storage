@@ -19,7 +19,7 @@ class ProductIntegrationTest {
 
     @Test
     void getAllProductsAndExpectStatus200AndExpectEmptyList() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/product"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/products"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                         []
