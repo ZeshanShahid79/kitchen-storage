@@ -26,7 +26,7 @@ class ProductServiceTest {
                 .thenReturn(expected);
 
         //when
-        List<Product> actual = productService.getAll();
+        List<Product> actual = productService.getAllProducts();
 
         //then
         assertEquals(expected,actual);
