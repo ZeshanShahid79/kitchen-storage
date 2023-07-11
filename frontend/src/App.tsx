@@ -1,11 +1,24 @@
+import {useProducts} from "./useProducts.tsx";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
 
-  return (
-    <>
-        "Hello World"
-    </>
-  )
+    const {products} = useProducts()
+
+    return (
+        <>
+
+            <h1>Kitchen Storage</h1>
+            <h3>Product List:</h3>
+
+            {products.map(product => (
+                <div key={product.id}>{product.productName}</div>
+            ))}
+            <ToastContainer/>
+        </>
+    );
 }
 
-export default App
+export default App;
