@@ -1,4 +1,6 @@
 import {useProducts} from "./useProducts.tsx";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -7,6 +9,7 @@ function App() {
 
     return (
         <>
+            <ToastContainer/>
             <h1>Kitchen Storage</h1>
             <h3>Product List:</h3>
 
