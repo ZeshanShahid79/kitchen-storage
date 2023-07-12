@@ -1,0 +1,27 @@
+name: "Get Logs"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restart docker container
+        uses: appleboy/ssh-action@master
+        with:
+          host: capstone-project.de
+          #Set App Name ("alpha" - "tango")
+          username: tango
+          password: ${{ secrets.SSH_PASSWORD }}
+          #Set App Name ("alpha" - "tango")
+          script: |
+            docker logs tango
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v3
+        with:
+          #Set App Name ("alpha" - "tango")
+          url: http://tango.capstone-project.de
+          max-attempts: 3
+          retry-delay: 5s
+          retry-all: true
