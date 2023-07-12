@@ -27,6 +27,7 @@ class ProductIntegrationTest {
                         []
                         """));
     }
+
     @Test
     @DirtiesContext
     void addProductAndExpectStatus200AndAddedProduct() throws Exception {
@@ -38,4 +39,6 @@ class ProductIntegrationTest {
 
 
     }
+
+
 }
