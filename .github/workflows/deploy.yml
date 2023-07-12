@@ -44,7 +44,7 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: app.jar
+          name: kitchen-storage.jar
           path: backend/target/kitchen-storage.jar
 
   push-to-docker-hub:
@@ -54,7 +54,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
         with:
-          name: app.jar
+          name: kitchen-storage.jar
           path: backend/target
 
       - name: Login to DockerHub
