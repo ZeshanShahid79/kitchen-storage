@@ -2,7 +2,7 @@ import {useProducts} from "./hooks/useProducts.tsx";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ProductAddForm from "./components/productAddForm.tsx";
-import {List, ListItem, Stack} from "@mui/material";
+import {List, ListItemAvatar, Stack} from "@mui/material";
 
 
 function App() {
@@ -10,19 +10,20 @@ function App() {
     const {products} = useProducts()
 
     return (
-
-        <Stack alignItems={"center"} justifyContent={"center"}>
-            <h6>Kitchen Storage</h6>
-            <h3>Product List:</h3>
-            <List dense={true} sx={{}}>
-                {products.map(product => (
-                    <ListItem key={product.id}>{product.productName}</ListItem>
-                ))}
-            </List>
-            <ProductAddForm/>
-            <ToastContainer/>
-        </Stack>
-
+        <>
+            <Stack alignItems={"center"}>
+                <h1>Kitchen Storage</h1>
+                <h3>Product List:</h3>
+                <List dense={true}>
+                    {products.map(product => (
+                        <ListItemAvatar sx={{border: 1, m: 2, p: 2}}
+                                        key={product.id}>{product.productName}</ListItemAvatar>
+                    ))}
+                </List>
+                <ProductAddForm/>
+                <ToastContainer/>
+            </Stack>
+        </>
     );
 }
 

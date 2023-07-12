@@ -36,8 +36,8 @@ function ProductAddForm() {
     return (
         <form onSubmit={handleSubmit}>
 
-            <TextField value={productName} onChange={handleProductNameInput} placeholder={"ProductName"} size={"small"} />
-            <Button variant={"contained"} size={"small"}>Add</Button>
+            <TextField value={productName} onChange={handleProductNameInput} label={"ProductName"} size={"small"} />
+            <Button variant={"contained"} size={"large"}>Add</Button>
 
         </form>
     );
