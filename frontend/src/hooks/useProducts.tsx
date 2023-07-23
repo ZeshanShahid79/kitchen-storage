@@ -25,10 +25,10 @@ export const useProducts = () => {
                     toast.error("Error fetching products")
             });
     }
-    function fetchProductsAfterAdd(){
+    function fetchProducts(){
         getProducts()
     }
 
-    return {products,fetchProductsAfterAdd}
+    return {products,fetchProducts}
 }
 

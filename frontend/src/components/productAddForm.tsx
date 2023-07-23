@@ -4,7 +4,7 @@ import {toast} from 'react-toastify';
 import {Button, TextField} from '@mui/material';
 
 type Props = {
-    fetchProductsAfterAdd: () => void;
+    fetchProducts: () => void;
 }
 
 function ProductAddForm(props: Props) {
@@ -16,7 +16,7 @@ function ProductAddForm(props: Props) {
             .post('api/products', {productName: productName})
             .then(() => {
                 toast.success('Added: ' + productName);
-                props.fetchProductsAfterAdd()
+                props.fetchProducts()
             })
             .catch(() => {
                 toast.error('Error adding product');

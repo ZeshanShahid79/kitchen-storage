@@ -7,7 +7,7 @@ import {Box, List, ListItemAvatar} from "@mui/material";
 
 function App() {
 
-    const {products, fetchProductsAfterAdd} = useProducts()
+    const {products, fetchProducts} = useProducts()
 
     return (
         <>
@@ -20,7 +20,7 @@ function App() {
                                         key={product.id}>{product.productName}</ListItemAvatar>
                     ))}
                 </List>
-                <ProductAddForm fetchProductsAfterAdd={fetchProductsAfterAdd}/>
+                <ProductAddForm fetchProducts={fetchProducts}/>
                 <ToastContainer/>
             </Box>
         </>

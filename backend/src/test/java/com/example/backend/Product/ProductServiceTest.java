@@ -32,11 +32,11 @@ class ProductServiceTest {
     void addProductAndExpectTheAddedProduct() {
         //given
         Product expected = new Product("wqeasd", "apple");
-        ProductWithouthId testProductWothouthId = new ProductWithouthId("apple");
+        ProductWithouthId testProductWithoutId = new ProductWithouthId("apple");
         //then
         when(uuidService.getRandomId()).thenReturn("wqeasd");
         when(productRepository.save(expected)).thenReturn(expected);
-        Product actual = productService.addProduct(testProductWothouthId);
+        Product actual = productService.addProduct(testProductWithoutId);
         //then
         assertEquals(expected,actual);
     }
