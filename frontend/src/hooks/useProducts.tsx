@@ -12,7 +12,7 @@ export const useProducts = () => {
 
     useEffect(() => {
         getProducts();
-    }, [products]);
+    }, []);
 
     function getProducts() {
         axios
@@ -25,7 +25,10 @@ export const useProducts = () => {
                     toast.error("Error fetching products")
             });
     }
+    function fetchProductsAfterAdd(){
+        getProducts()
+    }
 
-    return {products}
+    return {products,fetchProductsAfterAdd}
 }
 

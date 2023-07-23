@@ -2,16 +2,16 @@ import {useProducts} from "./hooks/useProducts.tsx";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ProductAddForm from "./components/productAddForm.tsx";
-import {List, ListItemAvatar, Stack} from "@mui/material";
+import {Box, List, ListItemAvatar} from "@mui/material";
 
 
 function App() {
 
-    const {products} = useProducts()
+    const {products, fetchProductsAfterAdd} = useProducts()
 
     return (
         <>
-            <Stack alignItems={"center"}>
+            <Box alignItems={"center"}>
                 <h1>Kitchen Storage</h1>
                 <h3>Product List:</h3>
                 <List dense={true}>
@@ -20,9 +20,9 @@ function App() {
                                         key={product.id}>{product.productName}</ListItemAvatar>
                     ))}
                 </List>
-                <ProductAddForm/>
+                <ProductAddForm fetchProductsAfterAdd={fetchProductsAfterAdd}/>
                 <ToastContainer/>
-            </Stack>
+            </Box>
         </>
     );
 }
