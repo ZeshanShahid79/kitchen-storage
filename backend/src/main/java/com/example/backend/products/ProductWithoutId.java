@@ -1,6 +1,7 @@
 package com.example.backend.products;
 
-public record ProductWithouthId(
+public record ProductWithoutId(
         String productName
+
 ) {
 }

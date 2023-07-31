@@ -32,7 +32,7 @@ class ProductServiceTest {
     void addProductAndExpectTheAddedProduct() {
         //given
         Product expected = new Product("wqeasd", "apple");
-        ProductWithouthId testProductWithoutId = new ProductWithouthId("apple");
+        ProductWithoutId testProductWithoutId = new ProductWithoutId("apple");
         //then
         when(uuidService.getRandomId()).thenReturn("wqeasd");
         when(productRepository.save(expected)).thenReturn(expected);
