@@ -1,7 +1,9 @@
 import axios from "axios";
-import {Product} from "./Product.ts";
+
 import {useEffect, useState} from "react";
 import {toast} from 'react-toastify';
+import {Product} from "../Product.ts";
+
 
 
 
@@ -23,7 +25,10 @@ export const useProducts = () => {
                     toast.error("Error fetching products")
             });
     }
+    function fetchProducts(){
+        getProducts()
+    }
 
-    return {products}
+    return {products,fetchProducts}
 }
 
