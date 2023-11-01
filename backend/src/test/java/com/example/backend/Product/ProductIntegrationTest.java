@@ -1,5 +1,7 @@
 package com.example.backend.Product;
 
+import com.example.backend.products.Product;
+import com.example.backend.products.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -9,7 +11,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @SpringBootTest
@@ -18,6 +21,9 @@ class ProductIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    ProductRepository productRepository;
 
     @Test
     void getAllProductsAndExpectStatus200AndExpectEmptyList() throws Exception {
@@ -40,5 +46,17 @@ class ProductIntegrationTest {
 
     }
 
+    @DirtiesContext
+    @Test
+    void deleteProductByIdAndExpectStatus200() throws Exception {
+        //GIVEN es muss ein Produkt in der DB vorhanden sein damit wir es löschen können
+        Product existingProduct = new Product("123", "apple");
+        productRepository.save(existingProduct);
+
+        //WHEN
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/products/123"))
+                //THEN
+                .andExpect(status().isOk());
+    }
 
 }
