@@ -20,8 +20,8 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Product addProduct(@RequestBody ProductWithouthId productWithouthId) {
-        return productService.addProduct(productWithouthId);
+    Product addProduct(@RequestBody ProductWithoutId productWithoutId) {
+        return productService.addProduct(productWithoutId);
     }
     @DeleteMapping("/{id}")
     Product deleteProductById(@PathVariable String id){

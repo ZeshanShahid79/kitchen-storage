@@ -1,9 +1,8 @@
 package com.example.backend.Product;
 
 import com.example.backend.products.Product;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.example.backend.products.Product;
 import com.example.backend.products.ProductRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -42,7 +41,7 @@ class ProductIntegrationTest {
     @Test
     @DirtiesContext
     void addProductAndExpectStatus200AndAddedProduct() throws Exception {
-        Product product = new Product(null, "apple");
+        Product product = new Product(null, "apple", null);
 
         String jsonPayload = objectMapper.writeValueAsString(product);
         String mvcResult =
@@ -66,7 +65,7 @@ class ProductIntegrationTest {
     @Test
     void deleteProductByIdAndExpectStatus200() throws Exception {
         //GIVEN es muss ein Produkt in der DB vorhanden sein damit wir es löschen können
-        Product existingProduct = new Product("123", "apple");
+        Product existingProduct = new Product("123", "apple", null);
         productRepository.save(existingProduct);
 
         //WHEN

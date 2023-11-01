@@ -18,9 +18,9 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Product addProduct(ProductWithouthId productWithouthId) {
+    public Product addProduct(ProductWithoutId productWithoutId) {
         String id = uuidService.getRandomId();
-        Product productToSave = new Product(id, productWithouthId.productName());
+        Product productToSave = new Product(id, productWithoutId.productName(), productWithoutId.amount());
         return productRepository.save(productToSave);
     }
 
