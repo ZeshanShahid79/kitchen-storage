@@ -5,8 +5,6 @@ import {toast} from 'react-toastify';
 import {Product} from "../Product.ts";
 
 
-
-
 export const useProducts = () => {
     const [products, setProducts] = useState<Product[]>([]);
 
@@ -25,10 +23,20 @@ export const useProducts = () => {
                     toast.error("Error fetching products")
             });
     }
+
+    function deleteProduct(id: string) {
+        axios
+            .delete("/api/products/" + id)
+            .then(getProducts)
+            .catch(() => {
+                toast.error("Error deleting product")
+            })
+    }
+
     function fetchProducts(){
         getProducts()
     }
 
-    return {products,fetchProducts}
+    return {products, fetchProducts, deleteProduct}
 }
 

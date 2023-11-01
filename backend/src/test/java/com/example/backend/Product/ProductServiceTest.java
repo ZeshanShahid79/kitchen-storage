@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -19,7 +19,7 @@ class ProductServiceTest {
     @Test
     void getAllProductsAndExpectListWithProduct() {
         //given
-        Product testProduct = new Product("wqeasd", "apple");
+        Product testProduct = new Product("wqeasd", "apple", 1);
         List<Product> expected = List.of(testProduct);
         //when
         when(productRepository.findAll()).thenReturn(expected);
@@ -32,8 +32,8 @@ class ProductServiceTest {
     @Test
     void addProductAndExpectTheAddedProduct() {
         //given
-        Product expected = new Product("wqeasd", "apple");
-        ProductWithouthId testProductWithoutId = new ProductWithouthId("apple");
+        Product expected = new Product("wqeasd", "apple", 1);
+        ProductWithoutId testProductWithoutId = new ProductWithoutId("apple", 1);
         //then
         when(uuidService.getRandomId()).thenReturn("wqeasd");
         when(productRepository.save(expected)).thenReturn(expected);
@@ -45,7 +45,7 @@ class ProductServiceTest {
     @Test
     void deleteProductById() {
         //given
-        Product expected = new Product("wqeasd", "apple");
+        Product expected = new Product("wqeasd", "apple", 1);
         //when
         when(productRepository.findById("wqeasd")).thenReturn(Optional.of(expected));
         //then
