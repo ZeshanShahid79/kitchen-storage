@@ -4,6 +4,7 @@ import com.example.backend.products.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -40,4 +41,16 @@ class ProductServiceTest {
         //then
         assertEquals(expected,actual);
     }
+
+    @Test
+    void deleteProductById() {
+        //given
+        Product expected = new Product("wqeasd", "apple");
+        //when
+        when(productRepository.findById("wqeasd")).thenReturn(Optional.of(expected));
+        //then
+        Product actual = productService.deleteProductById("wqeasd");
+        assertEquals(expected,actual);
+    }
+
 }
