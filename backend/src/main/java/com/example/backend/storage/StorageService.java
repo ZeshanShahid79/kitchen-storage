@@ -1,6 +1,5 @@
 package com.example.backend.storage;
 
-import com.example.backend.products.ProductRepository;
 import com.example.backend.utils.UuidService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +10,6 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class StorageService {
 
-    private final ProductRepository productRepository;
     private final StorageRepository storageRepository;
     private final UuidService uuidService;
 

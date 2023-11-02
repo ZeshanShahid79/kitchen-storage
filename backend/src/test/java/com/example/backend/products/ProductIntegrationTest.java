@@ -1,7 +1,5 @@
-package com.example.backend.Product;
+package com.example.backend.products;
 
-import com.example.backend.products.Product;
-import com.example.backend.products.ProductRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +38,7 @@ class ProductIntegrationTest {
 
     @Test
     @DirtiesContext
-    void addProductAndExpectStatus200AndAddedProduct() throws Exception {
+    void addProductAndExpectStatus201AndAddedProduct() throws Exception {
         Product product = new Product(null, "apple", null);
 
         String jsonPayload = objectMapper.writeValueAsString(product);
