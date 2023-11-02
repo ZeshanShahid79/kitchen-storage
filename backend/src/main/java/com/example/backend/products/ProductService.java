@@ -1,5 +1,6 @@
 package com.example.backend.products;
 
+import com.example.backend.utils.UuidService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
