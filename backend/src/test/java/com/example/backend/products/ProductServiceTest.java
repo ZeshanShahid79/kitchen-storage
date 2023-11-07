@@ -1,6 +1,6 @@
-package com.example.backend.Product;
+package com.example.backend.products;
 
-import com.example.backend.products.*;
+import com.example.backend.utils.UuidService;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

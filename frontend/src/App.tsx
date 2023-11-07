@@ -3,6 +3,7 @@ import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ProductAddForm from "./components/productAddForm.tsx";
 import {Box, List, ListItem, ListItemAvatar} from "@mui/material";
+import StoragePage from "./Pages/StoragePage.tsx";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
                         </ListItemAvatar>
                     ))}
                 </List>
+                <StoragePage/>
                 <ProductAddForm fetchProducts={fetchProducts}/>
                 <ToastContainer/>
             </Box>
