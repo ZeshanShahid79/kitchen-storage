@@ -23,11 +23,11 @@ public class StorageServiceTest {
     void addStorageAndExpectTheAddedProduct() {
         //GIVEN
         AddStorageLocationRequest newStorage = new AddStorageLocationRequest("fridge");
-        Storage expected = new Storage("asd", "fridge", Collections.emptyList());
+        StorageLocation expected = new StorageLocation("asd", "fridge", Collections.emptyList());
         //WHEN
         when(uuidService.getRandomId()).thenReturn("asd");
         when(storageRepository.save(expected)).thenReturn(expected);
-        Storage actual = storageService.addStorage(newStorage);
+        StorageLocation actual = storageService.addStorage(newStorage);
         //THEN
         assertEquals(expected, actual);
     }
