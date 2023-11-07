@@ -31,7 +31,7 @@ public class StorageIntegrationTest {
     @DirtiesContext
     void addStorageAndExpectStatus201AndAddedStorage() throws Exception {
 
-        Storage storage = new Storage(null, "fridge", Collections.emptyList());
+        StorageLocation storage = new StorageLocation(null, "fridge", Collections.emptyList());
         String jasonPayload = objectMapper.writeValueAsString(storage);
 
         String mvcResult =

@@ -13,7 +13,7 @@ public class StorageController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Storage addStorageLocation(@RequestBody AddStorageLocationRequest addStorageLocationRequest) {
+    public StorageLocation addStorageLocation(@RequestBody AddStorageLocationRequest addStorageLocationRequest) {
         return storageService.addStorage(addStorageLocationRequest);
     }
 
