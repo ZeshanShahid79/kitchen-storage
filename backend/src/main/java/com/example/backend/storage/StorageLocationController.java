@@ -4,10 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/storage")
 @RequiredArgsConstructor
-public class StorageController {
+public class StorageLocationController {
 
     private final StorageService storageService;
 
@@ -15,6 +17,11 @@ public class StorageController {
     @ResponseStatus(HttpStatus.CREATED)
     public StorageLocation addStorageLocation(@RequestBody AddStorageLocationRequest addStorageLocationRequest) {
         return storageService.addStorage(addStorageLocationRequest);
+    }
+
+    @GetMapping
+    public List<StorageLocation> getAllStorageLocations() {
+        return storageService.getAllStorageLocations();
     }
 
 }

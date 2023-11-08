@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -17,5 +18,9 @@ public class StorageService {
         String id = uuidService.getRandomId();
         StorageLocation newStorage = new StorageLocation(id, addStorageLocationRequest.storageName(), Collections.emptyList());
         return storageRepository.save(newStorage);
+    }
+
+    public List<StorageLocation> getAllStorageLocations() {
+        return storageRepository.findAll();
     }
 }
