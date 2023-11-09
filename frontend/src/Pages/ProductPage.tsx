@@ -1,6 +1,7 @@
 import {Product} from "../Product.ts";
 import {Box, List, ListItem, ListItemAvatar} from "@mui/material";
-import ProductAddForm from "../components/productAddForm.tsx";
+import {useNavigate} from "react-router";
+
 
 type Props = {
     products: Product[]
@@ -9,9 +10,9 @@ type Props = {
 }
 
 function ProductPage(props: Props) {
+    const navigateTo = useNavigate()
     return (
         <Box alignItems={"center"}>
-
             <h3>Product List:</h3>
             <List dense={true}>
                 {props.products.map(product => (
@@ -21,7 +22,7 @@ function ProductPage(props: Props) {
                     </ListItemAvatar>
                 ))}
             </List>
-            <ProductAddForm fetchProducts={props.fetchProducts}/>
+            <button onClick={() => navigateTo("/products/add")}>Add Product</button>
         </Box>
     );
 }

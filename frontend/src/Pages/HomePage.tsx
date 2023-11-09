@@ -1,19 +1,15 @@
-import {useProducts} from "../hooks/useProducts.tsx";
-import ProductPage from "./ProductPage.tsx";
-import StoragePage from "./StoragePage.tsx";
-import ProductAddForm from "../components/productAddForm.tsx";
+import {useNavigate} from "react-router";
 
 
 function HomePage() {
 
-    const {products, fetchProducts, deleteProduct} = useProducts()
+    const navigateTo = useNavigate()
+
+
     return (
         <div>
-            <button>ProductPage</button>
-            <button>StoragePage</button>
-            <ProductPage products={products} deleteProduct={deleteProduct} fetchProducts={fetchProducts}/>
-            <StoragePage/>
-            <ProductAddForm fetchProducts={fetchProducts}/>
+            <button onClick={() => navigateTo("/products")}>ProductPage</button>
+            <button onClick={() => navigateTo("/storage")}>StoragePage</button>
         </div>
     );
 }
