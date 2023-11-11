@@ -15,7 +15,7 @@ function ProductAddForm(props: Props) {
 
     const addProduct = (): void => {
         axios
-            .post('api/products', {productName, amount})
+            .post('/api/products', {productName, amount})
             .then(() => {
                 toast.success('Added: ' + productName);
                 props.fetchProducts()
