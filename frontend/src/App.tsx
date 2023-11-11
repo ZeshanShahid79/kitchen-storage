@@ -1,19 +1,22 @@
 import 'react-toastify/dist/ReactToastify.css';
-import HomePage from "./Pages/HomePage.tsx";
 import {Route, Routes} from "react-router";
-import ProductPage from "./Pages/ProductPage.tsx";
 import {useProducts} from "./hooks/useProducts.tsx";
-import ProductAddForm from "./components/productAddForm.tsx";
-import StoragePage from "./Pages/StoragePage.tsx";
+import {lazy, Suspense} from "react";
 
 
 function App() {
     const {products, fetchProducts, deleteProduct} = useProducts()
 
+    const HomePage = lazy(() => import("./Pages/HomePage.tsx"))
+    const ProductPage = lazy(() => import("./Pages/ProductPage.tsx"))
+    const StoragePage = lazy(() => import("./Pages/StoragePage.tsx"))
+    const ProductAddForm = lazy(() => import("./components/productAddForm.tsx"))
     return (
         <>
             <h1>Kitchen Storage</h1>
+            <Suspense fallback={<div>Loading...</div>}>
             <Routes>
+
                 <Route path={"/"} element={<HomePage/>}/>
 
                 <Route path={"/products"} element={<ProductPage products={products} deleteProduct={deleteProduct}
@@ -21,7 +24,9 @@ function App() {
 
                 <Route path={"/products/add"} element={<ProductAddForm fetchProducts={fetchProducts}/>}/>
                 <Route path={"/storage"} element={<StoragePage/>}/>
+
             </Routes>
+            </Suspense>
         </>
     );
 }
