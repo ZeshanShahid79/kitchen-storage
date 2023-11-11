@@ -8,7 +8,6 @@ import {Product} from "../Product.ts";
 export const useProducts = () => {
     const [products, setProducts] = useState<Product[]>([]);
 
-    const BASE_URL = "/api";
 
     useEffect(() => {
         getProducts();
@@ -16,7 +15,7 @@ export const useProducts = () => {
 
     function getProducts() {
         axios
-            .get(`${BASE_URL}/products`)
+            .get("/api/products")
             .then(response => {
                 const responseData = response.data as Product[]
                 setProducts(responseData);
@@ -28,7 +27,7 @@ export const useProducts = () => {
 
     function deleteProduct(id: string) {
         axios
-            .delete(`${BASE_URL}/products/` + id)
+            .delete("/api/products/" + id)
             .then(getProducts)
             .catch(() => {
                 toast.error("Error deleting product")
