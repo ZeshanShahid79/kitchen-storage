@@ -10,7 +10,9 @@ type Props = {
 }
 
 function ProductPage(props: Props) {
+
     const navigateTo = useNavigate()
+
     return (
         <Box alignItems={"center"}>
             <h3>Product List:</h3>
@@ -23,6 +25,7 @@ function ProductPage(props: Props) {
                 ))}
             </List>
             <button onClick={() => navigateTo("/products/add")}>Add Product</button>
+            <button onClick={() => navigateTo("/")}>Back</button>
         </Box>
     );
 }
