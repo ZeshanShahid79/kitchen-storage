@@ -2,7 +2,7 @@ import axios from "axios";
 
 import {useEffect, useState} from "react";
 import {toast} from 'react-toastify';
-import {Product} from "../Product.ts";
+import {AddProductRequest, Product} from "../Product.ts";
 
 
 export const useProducts = () => {
@@ -10,13 +10,13 @@ export const useProducts = () => {
 
 
     useEffect(() => {
-        getProducts();
+        fetchProducts();
     }, []);
 
-    function getProducts() {
+    function fetchProducts() {
         axios
             .get("/api/products")
-            .then(response => {
+            .then((response) => {
                 const responseData = response.data as Product[]
                 setProducts(responseData);
             })
@@ -25,19 +25,30 @@ export const useProducts = () => {
             });
     }
 
+    function addProduct(product: AddProductRequest) {
+        return axios
+            .post<Product>('/api/products', product)
+            .then((response) => {
+                toast.success('Added: ' + response.data.productName);
+                setProducts([...products, response.data]) // setter
+                return response.data
+            })
+            .catch((error) => {
+                toast.error('Error adding product');
+                throw error
+            });
+    }
+
     function deleteProduct(id: string) {
         axios
             .delete("/api/products/" + id)
-            .then(getProducts)
+            .then(fetchProducts)
             .catch(() => {
                 toast.error("Error deleting product")
             })
     }
 
-    function fetchProducts() {
-        getProducts()
-    }
 
-    return {products, fetchProducts, deleteProduct}
+    return {products, fetchProducts, deleteProduct, addProduct}
 }
 

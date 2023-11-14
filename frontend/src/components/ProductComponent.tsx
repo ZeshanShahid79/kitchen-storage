@@ -12,15 +12,17 @@ function ProductComponent(props: Props) {
     const [product, setProduct] = useState(props.product)
 
     function handleDecrement() {
-        const updatedProduct =
-            product ? {...product, amount: product.amount - 1} : product;
-        setProduct(updatedProduct)
+        setProduct((prevProduct) => ({
+            ...prevProduct,
+            amount: prevProduct.amount - 1,
+        }))
     }
 
     function handleIncrement() {
-        const updatedProduct =
-            product ? {...product, amount: product.amount + 1} : product;
-        setProduct(updatedProduct)
+        setProduct((prevProduct) => ({
+            ...prevProduct,
+            amount: prevProduct.amount + 1,
+        }))
     }
 
     return (
