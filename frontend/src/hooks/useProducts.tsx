@@ -8,6 +8,7 @@ import {Product} from "../Product.ts";
 export const useProducts = () => {
     const [products, setProducts] = useState<Product[]>([]);
 
+
     useEffect(() => {
         getProducts();
     }, []);
@@ -20,7 +21,7 @@ export const useProducts = () => {
                 setProducts(responseData);
             })
             .catch(() => {
-                    toast.error("Error fetching products")
+                toast.error("Error fetching products")
             });
     }
 
@@ -33,7 +34,7 @@ export const useProducts = () => {
             })
     }
 
-    function fetchProducts(){
+    function fetchProducts() {
         getProducts()
     }
 

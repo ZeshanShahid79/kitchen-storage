@@ -1,34 +1,32 @@
-import {useProducts} from "./hooks/useProducts.tsx";
-import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import ProductAddForm from "./components/productAddForm.tsx";
-import {Box, List, ListItem, ListItemAvatar} from "@mui/material";
-import StoragePage from "./Pages/StoragePage.tsx";
+import {Route, Routes} from "react-router";
+import {useProducts} from "./hooks/useProducts.tsx";
+import {lazy, Suspense} from "react";
 
 
 function App() {
-
     const {products, fetchProducts, deleteProduct} = useProducts()
 
-
+    const HomePage = lazy(() => import("./Pages/HomePage.tsx"))
+    const ProductPage = lazy(() => import("./Pages/ProductPage.tsx"))
+    const StoragePage = lazy(() => import("./Pages/StoragePage.tsx"))
+    const ProductAddForm = lazy(() => import("./components/productAddForm.tsx"))
     return (
-        <>
-            <Box alignItems={"center"}>
-                <h1>Kitchen Storage</h1>
-                <h3>Product List:</h3>
-                <List dense={true}>
-                    {products.map(product => (
-                        <ListItemAvatar sx={{border: 1, m: 2, p: 2}}
-                                        key={product.id}>{product.productName}<ListItem>{product.amount}</ListItem>
-                            <button onClick={() => deleteProduct(product.id)}>delete</button>
-                        </ListItemAvatar>
-                    ))}
-                </List>
-                <StoragePage/>
-                <ProductAddForm fetchProducts={fetchProducts}/>
-                <ToastContainer/>
-            </Box>
-        </>
+
+        <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+
+                <Route path={"/"} element={<HomePage/>}/>
+
+                <Route path={"/products"} element={<ProductPage products={products} deleteProduct={deleteProduct}
+                                                                fetchProducts={fetchProducts}/>}/>
+
+                <Route path={"/products/add"} element={<ProductAddForm fetchProducts={fetchProducts}/>}/>
+                <Route path={"/storage"} element={<StoragePage/>}/>
+
+            </Routes>
+        </Suspense>
+
     );
 }
 

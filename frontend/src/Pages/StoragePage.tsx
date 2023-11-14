@@ -2,6 +2,7 @@ import {ChangeEvent, FormEvent, useState} from 'react';
 import axios from "axios";
 import {toast} from "react-toastify";
 import {Button, TextField} from "@mui/material";
+import {useNavigate} from "react-router";
 
 
 function StoragePage() {
@@ -31,11 +32,16 @@ function StoragePage() {
         addStorage()
     }
 
+    const navigateTo = useNavigate()
+
     return (
-        <form onSubmit={handleSubmit}>
-            <TextField value={storageName} onChange={handleStorageLocation} label={"Storage"} size={"small"}/>
-            <Button variant={'contained'} size={'large'} type="submit">ADD</Button>
-        </form>
+        <>
+            <form onSubmit={handleSubmit}>
+                <TextField value={storageName} onChange={handleStorageLocation} label={"Storage"} size={"small"}/>
+                <Button variant={'contained'} size={'large'} type="submit">ADD</Button>
+            </form>
+            <button onClick={() => navigateTo("/")}>Back</button>
+        </>
     );
 }
 
