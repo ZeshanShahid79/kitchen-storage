@@ -8,8 +8,9 @@ function HomePage() {
 
     return (
         <div>
-            <button onClick={() => navigateTo("/products")}>ProductPage</button>
-            <button onClick={() => navigateTo("/storage")}>StoragePage</button>
+            <h1>Kitchen Storage</h1>
+            <button onClick={() => navigateTo("/products")} className={"page-button"}>ProductPage</button>
+            <button onClick={() => navigateTo("/storage")} className={"page-button"}>StoragePage</button>
         </div>
     );
 }

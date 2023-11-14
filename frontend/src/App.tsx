@@ -12,9 +12,8 @@ function App() {
     const StoragePage = lazy(() => import("./Pages/StoragePage.tsx"))
     const ProductAddForm = lazy(() => import("./components/productAddForm.tsx"))
     return (
-        <>
-            <h1>Kitchen Storage</h1>
-            <Suspense fallback={<div>Loading...</div>}>
+
+        <Suspense fallback={<div>Loading...</div>}>
             <Routes>
 
                 <Route path={"/"} element={<HomePage/>}/>
@@ -26,8 +25,8 @@ function App() {
                 <Route path={"/storage"} element={<StoragePage/>}/>
 
             </Routes>
-            </Suspense>
-        </>
+        </Suspense>
+
     );
 }
 
