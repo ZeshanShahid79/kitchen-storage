@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import {useEffect, useState} from "react";
 import {toast} from 'react-toastify';
 import {AddProductRequest, Product} from "../Product.ts";
@@ -12,6 +11,14 @@ export const useProducts = () => {
     useEffect(() => {
         fetchProducts();
     }, []);
+
+    function addOneToProductAmount(product: Product, index: number) {
+        setProducts(prevProducts => {
+            const newProducts = [...prevProducts]
+            newProducts[index] = {...product, amount: product.amount + 1}
+            return newProducts;
+        })
+    }
 
     function fetchProducts() {
         axios
@@ -49,6 +56,6 @@ export const useProducts = () => {
     }
 
 
-    return {products, fetchProducts, deleteProduct, addProduct}
+    return {products, fetchProducts, deleteProduct, addProduct, addOneToProductAmount}
 }
 

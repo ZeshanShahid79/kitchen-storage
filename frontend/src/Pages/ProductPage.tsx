@@ -8,6 +8,7 @@ type Props = {
     products: Product[]
     deleteProduct: (id: string) => void
     fetchProducts: () => void
+    addOneToProductAmount: (product: Product, index: number) => Product[];
 }
 
 function ProductPage(props: Props) {
@@ -19,8 +20,9 @@ function ProductPage(props: Props) {
         <Box alignItems={"center"}>
             <h3>Product List:</h3>
             <List dense={true}>
-                {props.products.map(product => (
-                    <ProductComponent key={product.id} product={product} deleteProduct={props.deleteProduct}/>
+                {props.products.map((product, index) => (
+                    <ProductComponent key={product.id} product={product} deleteProduct={props.deleteProduct}
+                                      index={index} addOneToProductAmount={props.addOneToProductAmount}/>
                 ))}
             </List>
             <button onClick={() => navigateTo("/products/add")}>Add Product</button>

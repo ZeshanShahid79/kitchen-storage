@@ -5,7 +5,7 @@ import {lazy, Suspense} from "react";
 
 
 function App() {
-    const {products, fetchProducts, deleteProduct, addProduct} = useProducts()
+    const {products, fetchProducts, deleteProduct, addProduct, addOneToProductAmount} = useProducts()
 
     const HomePage = lazy(() => import("./Pages/HomePage.tsx"))
     const ProductPage = lazy(() => import("./Pages/ProductPage.tsx"))
@@ -19,7 +19,8 @@ function App() {
                 <Route path={"/"} element={<HomePage/>}/>
 
                 <Route path={"/products"} element={<ProductPage products={products} deleteProduct={deleteProduct}
-                                                                fetchProducts={fetchProducts}/>}/>
+                                                                fetchProducts={fetchProducts}
+                                                                addOneToProductAmount={addOneToProductAmount}/>}/>
 
                 <Route path={"/products/add"} element={<ProductAddForm addProduct={addProduct}/>}/>
                 <Route path={"/storage"} element={<StoragePage/>}/>
