@@ -1,7 +1,7 @@
 import {Product} from "../Product.ts";
 import {Box, List} from "@mui/material";
 import {useNavigate} from "react-router";
-import ProductComponent from "../components/ProductComponent.tsx";
+import MemoizedProduct from "./MemoizedProduct.tsx";
 
 
 type Props = {
@@ -21,7 +21,7 @@ function ProductPage(props: Props) {
             <h3>Product List:</h3>
             <List dense={true}>
                 {props.products.map((product, index) => (
-                    <ProductComponent key={product.id} product={product} deleteProduct={props.deleteProduct}
+                    <MemoizedProduct key={product.id} product={product} deleteProduct={props.deleteProduct}
                                       index={index} addOneToProductAmount={props.addOneToProductAmount}/>
                 ))}
             </List>
