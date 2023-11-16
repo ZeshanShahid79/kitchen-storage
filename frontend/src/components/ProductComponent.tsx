@@ -6,7 +6,7 @@ type Props = {
     product: Product
     deleteProduct: (id: string) => void
     index: number
-    addOneToProductAmount: (product: Product, index: number) => Product[];
+    addOneToProductAmount: (product: Product, index: number) => void;
 }
 
 function ProductComponent(props: Props) {

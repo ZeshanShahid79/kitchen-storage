@@ -7,8 +7,7 @@ import MemoizedProduct from "./MemoizedProduct.tsx";
 type Props = {
     products: Product[]
     deleteProduct: (id: string) => void
-    fetchProducts: () => void
-    addOneToProductAmount: (product: Product, index: number) => Product[];
+    addOneToProductAmount: (product: Product, index: number) => void;
 }
 
 function ProductPage(props: Props) {

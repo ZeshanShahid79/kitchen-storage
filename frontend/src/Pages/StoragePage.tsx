@@ -1,11 +1,21 @@
 import {ChangeEvent, FormEvent, useState} from 'react';
 import axios from "axios";
 import {toast} from "react-toastify";
-import {Button, TextField} from "@mui/material";
+import {Button, List, TextField} from "@mui/material";
 import {useNavigate} from "react-router";
+import {StorageLocation} from "../StorageLocation.ts";
+import ProductComponent from "../components/ProductComponent.tsx";
+import {Product} from "../Product.ts";
 
+type Props = {
+    storageLocations: StorageLocation[]
+    fetchStorageLocations: () => void
+    deleteProduct: (id: string) => void
+    addOneToProductAmount: (product: Product, index: number) => void;
 
-function StoragePage() {
+}
+
+function StoragePage(props: Props) {
 
     const [storageName, setStorageName] = useState("")
 
@@ -36,6 +46,29 @@ function StoragePage() {
 
     return (
         <>
+            <List dense={true}>
+                {props.storageLocations.map(storageLocation => (
+                    <section key={storageLocation.id}>
+                        {storageLocation.storageName}
+                        <section>
+                            {storageLocation.products.map((product, index) => {
+                                console.log(product);
+                                return (
+                                    <ProductComponent
+                                        key={product.id}
+                                        product={product}
+                                        index={index}
+                                        deleteProduct={props.deleteProduct}
+                                        addOneToProductAmount={props.addOneToProductAmount}
+                                    />
+                                );
+                            })}
+                        </section>
+                    </section>
+                ))}
+            </List>
+
+
             <form onSubmit={handleSubmit}>
                 <TextField value={storageName} onChange={handleStorageLocation} label={"Storage"} size={"small"}/>
                 <Button variant={'contained'} size={'large'} type="submit">ADD</Button>
