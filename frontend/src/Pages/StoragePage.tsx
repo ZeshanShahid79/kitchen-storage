@@ -4,8 +4,12 @@ import {toast} from "react-toastify";
 import {Button, List, TextField} from "@mui/material";
 import {useNavigate} from "react-router";
 import {StorageLocation} from "../StorageLocation.ts";
-import ProductComponent from "../components/ProductComponent.tsx";
 import {Product} from "../Product.ts";
+import StorageComponent from "../components/StorageComponent.tsx";
+import ProductComponent from "../components/ProductComponent.tsx";
+
+
+
 
 type Props = {
     storageLocations: StorageLocation[]
@@ -46,6 +50,15 @@ function StoragePage(props: Props) {
 
     return (
         <>
+            <List dense={true}>
+                {props.storageLocations.map(storageLocation => (
+                    <button key={storageLocation.id} onClick={() => navigateTo(`/` + storageLocation.id)}>
+                        <StorageComponent storageLocation={storageLocation}/>
+                    </button>
+                ))}
+            </List>
+
+
             <List dense={true}>
                 {props.storageLocations.map(storageLocation => (
                     <section key={storageLocation.id}>

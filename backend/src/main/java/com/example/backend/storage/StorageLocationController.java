@@ -1,5 +1,6 @@
 package com.example.backend.storage;
 
+import com.example.backend.products.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -24,4 +25,8 @@ public class StorageLocationController {
         return storageService.getAllStorageLocations();
     }
 
+    @PutMapping("{id}")
+    public StorageLocation updateStorageLocation(@PathVariable String id, @RequestBody List<Product> products) {
+        return storageService.updateStorage(id, products);
+    }
 }
