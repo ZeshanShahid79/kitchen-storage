@@ -25,6 +25,12 @@ public class StorageLocationController {
         return storageService.getAllStorageLocations();
     }
 
+    @GetMapping("{id}")
+    public StorageLocation getStorageLocationById(@PathVariable String id) {
+        return storageService.getStorageLocationById(id);
+    }
+
+
     @PutMapping("{id}")
     public StorageLocation updateStorageLocation(@PathVariable String id, @RequestBody List<Product> products) {
         return storageService.updateStorage(id, products);

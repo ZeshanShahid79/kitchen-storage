@@ -30,4 +30,8 @@ public class StorageService {
         StorageLocation updatedStorage = new StorageLocation(id, oldStorage.storageName(), products);
         return storageRepository.save(updatedStorage);
     }
+
+    public StorageLocation getStorageLocationById(String id) {
+        return storageRepository.findById(id).orElseThrow();
+    }
 }

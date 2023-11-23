@@ -49,25 +49,21 @@ function StoragePage(props: Props) {
         <>
             <List dense={true}>
                 {props.storageLocations.map(storageLocation => (
-                    <button key={storageLocation.id} onClick={() => navigateTo(`/storage/` + storageLocation.id)}>
+                    <button key={storageLocation.id} onClick={() => {
+                        if (storageLocation.products.length > 0) {
+                            navigateTo("/storage/" + storageLocation.id);
+                        } else {
+                            // Hier fetchStorageLocations aufrufen, um die Produktdaten zu laden
+                            props.fetchStorageLocations();
+                            // Dann erst navigieren, nachdem die Daten geladen wurden
+                            navigateTo("/storage/" + storageLocation.id);
+                        }
+                    }}>
                         <StorageComponent storageLocation={storageLocation}/>
                     </button>
                 ))}
             </List>
 
-
-            <List dense={true}>
-                {props.storageLocations.map(storageLocation => (
-                    <section key={storageLocation.id}>
-                        {storageLocation.storageName}
-
-                        {storageLocation.products.map(product => (
-                            <p>{product.productName}</p>
-                        ))}
-
-                    </section>
-                ))}
-            </List>
 
 
             <form onSubmit={handleSubmit}>
