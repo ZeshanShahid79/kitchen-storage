@@ -5,6 +5,7 @@ import {toast} from "react-toastify";
 
 export const useStorageLocation = () => {
     const [storageLocations, setStorageLocations] = useState<StorageLocation[]>([])
+    const [storageLocation, setStorageLocation] = useState<StorageLocation>()
 
     useEffect(() => {
         fetchStorageLocations()
@@ -22,5 +23,15 @@ export const useStorageLocation = () => {
             })
     }
 
-    return {storageLocations, fetchStorageLocations}
+    function getStorageById(id: string) {
+        axios
+            .get(`api/storage/${id}`)
+            .then(response => {
+                const responseData = response.data as StorageLocation
+                setStorageLocation(responseData)
+            })
+            .catch(error => console.log(error))
+    }
+
+    return {storageLocation, storageLocations, fetchStorageLocations, getStorageById}
 }
