@@ -1,11 +1,9 @@
 package com.example.backend.storage;
 
-import com.example.backend.products.Product;
 import com.example.backend.utils.UuidService;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -17,12 +15,12 @@ public class StorageServiceTest {
     UuidService uuidService = mock(UuidService.class);
 
     StorageService storageService = new StorageService(storageRepository, uuidService);
-    List<Product> products = List.of(new Product("123", "apple", 2));
+
 
     @Test
     void addStorageAndExpectTheAddedProduct() {
         //GIVEN
-        AddStorageLocationRequest newStorage = new AddStorageLocationRequest("fridge");
+        StorageLocationRequest newStorage = new StorageLocationRequest("fridge", Collections.emptyList());
         StorageLocation expected = new StorageLocation("asd", "fridge", Collections.emptyList());
         //WHEN
         when(uuidService.getRandomId()).thenReturn("asd");

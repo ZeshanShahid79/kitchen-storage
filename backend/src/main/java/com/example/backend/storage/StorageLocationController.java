@@ -16,8 +16,8 @@ public class StorageLocationController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public StorageLocation addStorageLocation(@RequestBody AddStorageLocationRequest addStorageLocationRequest) {
-        return storageService.addStorage(addStorageLocationRequest);
+    public StorageLocation addStorageLocation(@RequestBody StorageLocationRequest storageLocationRequest) {
+        return storageService.addStorage(storageLocationRequest);
     }
 
     @GetMapping

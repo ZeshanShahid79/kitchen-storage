@@ -15,9 +15,9 @@ public class StorageService {
     private final StorageRepository storageRepository;
     private final UuidService uuidService;
 
-    public StorageLocation addStorage(AddStorageLocationRequest addStorageLocationRequest) {
+    public StorageLocation addStorage(StorageLocationRequest storageLocationRequest) {
         String id = uuidService.getRandomId();
-        StorageLocation newStorage = new StorageLocation(id, addStorageLocationRequest.storageName(), Collections.emptyList());
+        StorageLocation newStorage = new StorageLocation(id, storageLocationRequest.storageName(), Collections.emptyList());
         return storageRepository.save(newStorage);
     }
 
