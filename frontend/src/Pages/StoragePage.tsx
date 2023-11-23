@@ -6,9 +6,6 @@ import {useNavigate} from "react-router";
 import {StorageLocation} from "../StorageLocation.ts";
 import {Product} from "../Product.ts";
 import StorageComponent from "../components/StorageComponent.tsx";
-import ProductComponent from "../components/ProductComponent.tsx";
-
-
 
 
 type Props = {
@@ -52,7 +49,7 @@ function StoragePage(props: Props) {
         <>
             <List dense={true}>
                 {props.storageLocations.map(storageLocation => (
-                    <button key={storageLocation.id} onClick={() => navigateTo(`/` + storageLocation.id)}>
+                    <button key={storageLocation.id} onClick={() => navigateTo(`/storage/` + storageLocation.id)}>
                         <StorageComponent storageLocation={storageLocation}/>
                     </button>
                 ))}
@@ -63,20 +60,11 @@ function StoragePage(props: Props) {
                 {props.storageLocations.map(storageLocation => (
                     <section key={storageLocation.id}>
                         {storageLocation.storageName}
-                        <section>
-                            {storageLocation.products.map((product, index) => {
-                                console.log(product);
-                                return (
-                                    <ProductComponent
-                                        key={product.id}
-                                        product={product}
-                                        index={index}
-                                        deleteProduct={props.deleteProduct}
-                                        addOneToProductAmount={props.addOneToProductAmount}
-                                    />
-                                );
-                            })}
-                        </section>
+
+                        {storageLocation.products.map(product => (
+                            <p>{product.productName}</p>
+                        ))}
+
                     </section>
                 ))}
             </List>
