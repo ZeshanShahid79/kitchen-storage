@@ -47,11 +47,11 @@ function StoragePage(props: Props) {
         <>
             <List dense={true}>
                 {props.storageLocations.map(storageLocation => (
-                    <>
+                    <div key={storageLocation.id}>
                         <StorageComponent storageLocation={storageLocation}/>
                         <button onClick={() => props.getStorageById(storageLocation.id)}>GET</button>
                         <button onClick={() => navigateTo("/storage/" + storageLocation.id)}>GO TO</button>
-                    </>
+                    </div>
                 ))}
             </List>
 

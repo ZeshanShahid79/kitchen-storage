@@ -12,8 +12,8 @@ function StorageComponent(props: Props) {
     return (
         <Box sx={{border: 1, m: 2, p: 2}}>
             <p>{props.storageLocation.storageName}</p>
-            {props.storageLocation.products.map((product, index) => (
-                <p key={index}>{product.productName}</p>
+            {props.storageLocation.products.map((product) => (
+                <p key={product.id}>{product.productName}</p>
             ))}
         </Box>
     );
