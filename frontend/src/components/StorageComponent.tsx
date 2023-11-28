@@ -8,7 +8,7 @@ type Props = {
 
 function StorageComponent(props: Props) {
 
-    console.log(props.storageLocation)
+
     return (
         <Box sx={{border: 1, m: 2, p: 2}}>
             <p>{props.storageLocation.storageName}</p>

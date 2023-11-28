@@ -10,7 +10,6 @@ import StorageComponent from "../components/StorageComponent.tsx";
 type Props = {
     storageLocations: StorageLocation[]
     fetchStorageLocations: () => void
-    getStorageById: (id: string) => void
 
 }
 
@@ -49,7 +48,6 @@ function StoragePage(props: Props) {
                 {props.storageLocations.map(storageLocation => (
                     <div key={storageLocation.id}>
                         <StorageComponent storageLocation={storageLocation}/>
-                        <button onClick={() => props.getStorageById(storageLocation.id)}>GET</button>
                         <button onClick={() => navigateTo("/storage/" + storageLocation.id)}>GO TO</button>
                     </div>
                 ))}
