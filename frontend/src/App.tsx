@@ -1,32 +1,21 @@
 import 'react-toastify/dist/ReactToastify.css';
 import {Route, Routes} from "react-router";
-import {useProducts} from "./hooks/useProducts.tsx";
-import {lazy, Suspense} from "react";
-
+import StoragePage from "./Pages/StoragePage.tsx";
+import {useStorageLocation} from "./hooks/useStorageLocation.tsx";
+import StorageDetailComponent from "./components/StorageDetailComponent.tsx";
 
 function App() {
-    const {products, fetchProducts, deleteProduct} = useProducts()
+    const {storageLocations, fetchStorageLocations, deleteStorageLocation} = useStorageLocation();
 
-    const HomePage = lazy(() => import("./Pages/HomePage.tsx"))
-    const ProductPage = lazy(() => import("./Pages/ProductPage.tsx"))
-    const StoragePage = lazy(() => import("./Pages/StoragePage.tsx"))
-    const ProductAddForm = lazy(() => import("./components/productAddForm.tsx"))
     return (
+        <Routes>
+            <Route path={"/"} element={<StoragePage storageLocations={storageLocations}
+                                                           fetchStorageLocations={fetchStorageLocations}
+                                                           deleteStorageLocation={deleteStorageLocation}
+            />}/>
 
-        <Suspense fallback={<div>Loading...</div>}>
-            <Routes>
-
-                <Route path={"/"} element={<HomePage/>}/>
-
-                <Route path={"/products"} element={<ProductPage products={products} deleteProduct={deleteProduct}
-                                                                fetchProducts={fetchProducts}/>}/>
-
-                <Route path={"/products/add"} element={<ProductAddForm fetchProducts={fetchProducts}/>}/>
-                <Route path={"/storage"} element={<StoragePage/>}/>
-
-            </Routes>
-        </Suspense>
-
+            <Route path={"/storage/:id"} element={<StorageDetailComponent/>}/>
+        </Routes>
     );
 }
 

@@ -1,12 +1,20 @@
 import {ChangeEvent, FormEvent, useState} from 'react';
 import axios from "axios";
 import {toast} from "react-toastify";
-import {Button, TextField} from "@mui/material";
+import {StorageLocation} from "../StorageLocation.ts";
+import StorageComponent from "../components/StorageComponent.tsx";
 import {useNavigate} from "react-router";
+import "./StoragePage.css"
 
 
-function StoragePage() {
+type Props = {
+    storageLocations: StorageLocation[]
+    fetchStorageLocations: () => void
+    deleteStorageLocation: (id: string) => void
 
+}
+
+function StoragePage(props: Props) {
     const [storageName, setStorageName] = useState("")
 
     function handleStorageLocation(event: ChangeEvent<HTMLInputElement>) {
@@ -21,24 +29,37 @@ function StoragePage() {
                 toast.success('Added: ' + storageName);
                 setStorageName("")
             })
+            .then(props.fetchStorageLocations)
             .catch(() => {
                 toast.error('Error adding product');
             });
     };
 
+    const navigateTo = useNavigate()
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         addStorage()
     }
 
-    const navigateTo = useNavigate()
 
     return (
         <>
+            <h1>Storages:</h1>
+
+            {props.storageLocations.map(storageLocation => (
+                <div key={storageLocation.id}>
+                    <StorageComponent storageLocation={storageLocation}/>
+                    <button className={"delete-button"}
+                            onClick={() => props.deleteStorageLocation(storageLocation.id)}>delete
+                    </button>
+                </div>
+            ))}
+
+
             <form onSubmit={handleSubmit}>
-                <TextField value={storageName} onChange={handleStorageLocation} label={"Storage"} size={"small"}/>
-                <Button variant={'contained'} size={'large'} type="submit">ADD</Button>
+                <input value={storageName} onChange={handleStorageLocation} placeholder={"Storage"}/>
+                <button className={"add-button"} type="submit">+</button>
             </form>
             <button onClick={() => navigateTo("/")}>Back</button>
         </>

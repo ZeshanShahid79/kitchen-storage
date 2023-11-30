@@ -1,58 +1,49 @@
-import {ChangeEvent, FormEvent, useState} from 'react';
-import axios from 'axios';
-import {toast} from 'react-toastify';
-import {Button, TextField} from '@mui/material';
-import {useNavigate} from "react-router";
+import {ChangeEvent, FormEvent, useState} from 'react'
+import {AddProductRequest} from "../Product.ts";
 
 type Props = {
-    fetchProducts: () => void;
+    updateId: string
+    addProduct: (product: AddProductRequest) => void
 }
 
 function ProductAddForm(props: Props) {
-    const [productName, setProductName] = useState<string>('');
-    const [amount, setAmount] = useState<string>('');
+    const [productName, setProductName] = useState<string>("");
+    const [amount, setAmount] = useState<number>(0);
 
-
-    const addProduct = (): void => {
-        axios
-            .post('/api/products', {productName, amount})
-            .then(() => {
-                toast.success('Added: ' + productName);
-                props.fetchProducts()
-            })
-            .catch(() => {
-                toast.error('Error adding product');
-            });
-    };
 
     function handleProductNameInput(event: ChangeEvent<HTMLInputElement>) {
         setProductName(event.target.value);
     }
 
     function handleProductAmount(event: ChangeEvent<HTMLInputElement>) {
-        setAmount(event.target.value);
+        const newValue = event.target.valueAsNumber;
+
+        if (!isNaN(newValue)) {
+            setAmount(newValue);
+        } else if (event.target.value === "") {
+            setAmount(0);
+        }
     }
+
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        addProduct();
-        setProductName('')
-        setAmount("")
+        props.addProduct({productName, amount})
+        setProductName("")
+        setAmount(0)
     }
 
-    const navigateTo = useNavigate()
 
     return (
-        <>
+
         <form onSubmit={handleSubmit}>
-            <TextField value={productName} onChange={handleProductNameInput} label={'ProductName'} size={'small'}/>
-            <TextField value={amount} onChange={handleProductAmount} label={'Amount'} size={'small'} type={"number"}/>
-            <Button variant={'contained'} size={'large'} type="submit">
+            <input value={productName} onChange={handleProductNameInput} placeholder={'ProductName'}/>
+            <input value={amount.toString()} onChange={handleProductAmount} placeholder={""}
+                   type={"number"}/>
+            <button type="submit">
                 Add
-            </Button>
+            </button>
         </form>
-            <button onClick={() => navigateTo("/products")}>Back</button>
-        </>
     );
 }
 

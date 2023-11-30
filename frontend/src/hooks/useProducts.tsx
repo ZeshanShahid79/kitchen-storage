@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import {useEffect, useState} from "react";
 import {toast} from 'react-toastify';
 import {Product} from "../Product.ts";
@@ -10,13 +9,21 @@ export const useProducts = () => {
 
 
     useEffect(() => {
-        getProducts();
+        fetchProducts();
     }, []);
 
-    function getProducts() {
+    function addOneToProductAmount(product: Product, index: number) {
+        setProducts(prevProducts => {
+            const newProducts = [...prevProducts]
+            newProducts[index] = {...product, amount: product.amount + 1}
+            return newProducts;
+        })
+    }
+
+    function fetchProducts() {
         axios
             .get("/api/products")
-            .then(response => {
+            .then((response) => {
                 const responseData = response.data as Product[]
                 setProducts(responseData);
             })
@@ -25,19 +32,18 @@ export const useProducts = () => {
             });
     }
 
+
+
     function deleteProduct(id: string) {
         axios
             .delete("/api/products/" + id)
-            .then(getProducts)
+            .then(fetchProducts)
             .catch(() => {
                 toast.error("Error deleting product")
             })
     }
 
-    function fetchProducts() {
-        getProducts()
-    }
 
-    return {products, fetchProducts, deleteProduct}
+    return {products, fetchProducts, deleteProduct, addOneToProductAmount}
 }
 
