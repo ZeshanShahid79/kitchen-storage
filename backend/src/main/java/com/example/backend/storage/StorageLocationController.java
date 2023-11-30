@@ -34,4 +34,9 @@ public class StorageLocationController {
     public StorageLocation updateStorageLocation(@PathVariable String id, @RequestBody StorageLocationRequest storageLocationRequest) {
         return storageService.updateStorage(id, storageLocationRequest);
     }
+
+    @DeleteMapping("{id}")
+    public void deleteStorageLocation(@PathVariable String id) {
+        storageService.deleteStorage(id);
+    }
 }

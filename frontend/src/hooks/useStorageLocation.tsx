@@ -23,6 +23,14 @@ export const useStorageLocation = () => {
             })
     }
 
+    function deleteStorageLocation(id: string) {
+        axios
+            .delete("/api/storage/" + id)
+            .then(fetchStorageLocations)
+            .catch(() => {
+                toast.error("Error deleting product")
+            })
+    }
 
-    return {storageLocations, fetchStorageLocations}
+    return {storageLocations, fetchStorageLocations, deleteStorageLocation}
 }

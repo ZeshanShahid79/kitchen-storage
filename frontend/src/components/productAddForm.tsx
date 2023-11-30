@@ -16,7 +16,13 @@ function ProductAddForm(props: Props) {
     }
 
     function handleProductAmount(event: ChangeEvent<HTMLInputElement>) {
-        setAmount(event.target.valueAsNumber);
+        const newValue = event.target.valueAsNumber;
+
+        if (!isNaN(newValue)) {
+            setAmount(newValue);
+        } else if (event.target.value === "") {
+            setAmount(0);
+        }
     }
 
 
@@ -30,14 +36,14 @@ function ProductAddForm(props: Props) {
 
     return (
 
-            <form onSubmit={handleSubmit}>
-                <input value={productName} onChange={handleProductNameInput} placeholder={'ProductName'}/>
-                <input value={amount} onChange={handleProductAmount} placeholder={""}
-                       type={"number"}/>
-                <button type="submit">
-                    Add
-                </button>
-            </form>
+        <form onSubmit={handleSubmit}>
+            <input value={productName} onChange={handleProductNameInput} placeholder={'ProductName'}/>
+            <input value={amount.toString()} onChange={handleProductAmount} placeholder={""}
+                   type={"number"}/>
+            <button type="submit">
+                Add
+            </button>
+        </form>
     );
 }
 
