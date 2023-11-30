@@ -10,6 +10,7 @@ import {useNavigate} from "react-router";
 type Props = {
     storageLocations: StorageLocation[]
     fetchStorageLocations: () => void
+    deleteStorageLocation: (id: string) => void
 
 }
 
@@ -28,18 +29,18 @@ function StoragePage(props: Props) {
                 toast.success('Added: ' + storageName);
                 setStorageName("")
             })
+            .then(props.fetchStorageLocations)
             .catch(() => {
                 toast.error('Error adding product');
             });
     };
 
     const navigateTo = useNavigate()
+
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         addStorage()
     }
-
-
 
 
     return (
@@ -49,6 +50,7 @@ function StoragePage(props: Props) {
                 {props.storageLocations.map(storageLocation => (
                     <div key={storageLocation.id}>
                         <StorageComponent storageLocation={storageLocation}/>
+                        <button onClick={() => props.deleteStorageLocation(storageLocation.id)}>delete</button>
                     </div>
                 ))}
             </List>

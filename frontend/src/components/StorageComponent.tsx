@@ -15,7 +15,6 @@ function StorageComponent(props: Props) {
             <h3>{props.storageLocation.storageName}</h3>
             <p>{"Items: " + amount}</p>
             <button onClick={() => navigateTo("/storage/" + props.storageLocation.id)}>GO TO</button>
-            <button>delete</button>
         </Box>
     );
 }

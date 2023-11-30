@@ -33,4 +33,8 @@ public class StorageService {
     public StorageLocation getStorageLocationById(String id) {
         return storageRepository.findById(id).orElseThrow();
     }
+
+    public void deleteStorage(String id) {
+        storageRepository.deleteById(id);
+    }
 }
