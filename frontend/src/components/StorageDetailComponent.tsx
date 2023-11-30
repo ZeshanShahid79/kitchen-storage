@@ -27,7 +27,7 @@ function StorageDetailComponent() {
             .catch(error => console.log(error));
     }
 
-    const handleAmountChange = (productIndex: number, newAmount: number) => {
+    function handleAmountChange(productIndex: number, newAmount: number) {
         const updatedProducts = [...storageLocation.products];
         updatedProducts[productIndex] = {
             ...updatedProducts[productIndex],
@@ -35,9 +35,13 @@ function StorageDetailComponent() {
         };
         console.log(updatedProducts);
         setStorageLocation(prevState => ({...prevState, products: updatedProducts}));
-    };
-    const addProduct = (product: AddProductRequest) => {
-        setStorageLocation(prevState => ({...prevState, products: [...prevState.products, product]}));
+    }
+
+    function addProduct(product: AddProductRequest) {
+        setStorageLocation(prevState => {
+            const updatedProducts = [...(prevState.products || []), product];
+            return {...prevState, products: updatedProducts};
+        });
     }
 
     function updateStorage(id: string) {

@@ -44,6 +44,7 @@ function StoragePage(props: Props) {
 
     return (
         <>
+            <h1>Storage:</h1>
             <List dense={true}>
                 {props.storageLocations.map(storageLocation => (
                     <div key={storageLocation.id}>
