@@ -1,6 +1,5 @@
 package com.example.backend.storage;
 
-import com.example.backend.products.Product;
 import com.example.backend.utils.UuidService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,9 +24,9 @@ public class StorageService {
         return storageRepository.findAll();
     }
 
-    public StorageLocation updateStorage(String id, List<Product> products) {
+    public StorageLocation updateStorage(String id, StorageLocationRequest storageLocationRequest) {
         StorageLocation oldStorage = storageRepository.findById(id).orElseThrow();
-        StorageLocation updatedStorage = new StorageLocation(id, oldStorage.storageName(), products);
+        StorageLocation updatedStorage = new StorageLocation(id, oldStorage.storageName(), storageLocationRequest.productList());
         return storageRepository.save(updatedStorage);
     }
 

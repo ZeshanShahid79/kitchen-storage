@@ -1,5 +1,5 @@
 import {useParams} from "react-router";
-import {useEffect, useState} from "react";
+import {FormEvent, useEffect, useState} from "react";
 import {StorageLocation} from "../StorageLocation.ts";
 import axios from "axios";
 
@@ -23,10 +23,6 @@ function StorageDetailComponent() {
             .catch(error => console.log(error));
     }
 
-    if (!storageLocation) {
-        return <div>Loading...</div>;
-    }
-
     const handleAmountChange = (productIndex: number, newAmount: number) => {
         const updatedProducts = [...storageLocation.products];
         updatedProducts[productIndex] = {
@@ -35,12 +31,28 @@ function StorageDetailComponent() {
         };
         setStorageLocation(prevState => ({...prevState, products: updatedProducts}));
     };
-    console.log(storageLocation)
-    storageLocation.products.forEach(product => {
-        console.log(product.id);
-    });
+
+    function updateStorage(id: string) {
+        axios
+            .put(`/api/storage/${id}`, storageLocation)
+            .then(response => {
+                const responseData = response.data as StorageLocation;
+                setStorageLocation(responseData);
+            })
+            .catch(error => console.log(error));
+    }
+
+    function handleSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        updateStorage(storageLocation.id)
+    }
+
+    if (!storageLocation) {
+        return <div>Loading...</div>;
+    }
+
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <h1>{storageLocation.storageName}</h1>
             {storageLocation.products.map((product, index) => (
                 <div key={product.id}>
