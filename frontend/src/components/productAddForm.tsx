@@ -1,11 +1,9 @@
-import {ChangeEvent, FormEvent, useState} from 'react';
-import {Button, TextField} from '@mui/material';
-import {useNavigate} from "react-router";
-import {AddProductRequest, Product} from "../Product.ts";
-
+import {ChangeEvent, FormEvent, useState} from 'react'
+import {AddProductRequest} from "../Product.ts";
 
 type Props = {
-    addProduct: (product: AddProductRequest) => Promise<Product>;
+    updateId: string
+    addProduct: (product: AddProductRequest) => void
 }
 
 function ProductAddForm(props: Props) {
@@ -21,31 +19,25 @@ function ProductAddForm(props: Props) {
         setAmount(event.target.valueAsNumber);
     }
 
+
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         props.addProduct({productName, amount})
-            .then((_product) => {         // hier könnte man das promise entgegen nehmen und die werte nutzen z.B für validation usw.
-                setProductName("")
-                setAmount(0)
-            })
-            .catch(console.log) // hier könnte eine spezifische fehlermeldung genutzt werden zur validation
-
+        setProductName("")
+        setAmount(0)
     }
 
-    const navigateTo = useNavigate()
 
     return (
-        <>
+
             <form onSubmit={handleSubmit}>
-                <TextField value={productName} onChange={handleProductNameInput} label={'ProductName'} size={'small'}/>
-                <TextField value={amount} onChange={handleProductAmount} label={'Amount'} size={'small'}
-                           type={"number"}/>
-                <Button variant={'contained'} size={'large'} type="submit">
+                <input value={productName} onChange={handleProductNameInput} placeholder={'ProductName'}/>
+                <input value={amount} onChange={handleProductAmount} placeholder={""}
+                       type={"number"}/>
+                <button type="submit">
                     Add
-                </Button>
+                </button>
             </form>
-            <button onClick={() => navigateTo("/products")}>Back</button>
-        </>
     );
 }
 

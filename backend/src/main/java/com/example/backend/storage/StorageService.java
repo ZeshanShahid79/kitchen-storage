@@ -26,7 +26,7 @@ public class StorageService {
 
     public StorageLocation updateStorage(String id, StorageLocationRequest storageLocationRequest) {
         StorageLocation oldStorage = storageRepository.findById(id).orElseThrow();
-        StorageLocation updatedStorage = new StorageLocation(id, oldStorage.storageName(), storageLocationRequest.productList());
+        StorageLocation updatedStorage = new StorageLocation(id, oldStorage.storageName(), storageLocationRequest.products());
         return storageRepository.save(updatedStorage);
     }
 

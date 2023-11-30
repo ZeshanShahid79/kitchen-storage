@@ -1,7 +1,7 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {toast} from 'react-toastify';
-import {AddProductRequest, Product} from "../Product.ts";
+import {Product} from "../Product.ts";
 
 
 export const useProducts = () => {
@@ -32,19 +32,7 @@ export const useProducts = () => {
             });
     }
 
-    function addProduct(product: AddProductRequest) {
-        return axios
-            .post<Product>('/api/products', product)
-            .then((response) => {
-                toast.success('Added: ' + response.data.productName);
-                setProducts([...products, response.data]) // setter
-                return response.data
-            })
-            .catch((error) => {
-                toast.error('Error adding product');
-                throw error
-            });
-    }
+
 
     function deleteProduct(id: string) {
         axios
@@ -56,6 +44,6 @@ export const useProducts = () => {
     }
 
 
-    return {products, fetchProducts, deleteProduct, addProduct, addOneToProductAmount}
+    return {products, fetchProducts, deleteProduct, addOneToProductAmount}
 }
 

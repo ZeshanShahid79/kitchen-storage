@@ -1,10 +1,10 @@
 import {ChangeEvent, FormEvent, useState} from 'react';
 import axios from "axios";
 import {toast} from "react-toastify";
-import {Button, List, TextField} from "@mui/material";
-import {useNavigate} from "react-router";
+import {List} from "@mui/material";
 import {StorageLocation} from "../StorageLocation.ts";
 import StorageComponent from "../components/StorageComponent.tsx";
+import {useNavigate} from "react-router";
 
 
 type Props = {
@@ -33,13 +33,13 @@ function StoragePage(props: Props) {
             });
     };
 
-
+    const navigateTo = useNavigate()
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         addStorage()
     }
 
-    const navigateTo = useNavigate()
+
 
 
     return (
@@ -48,15 +48,14 @@ function StoragePage(props: Props) {
                 {props.storageLocations.map(storageLocation => (
                     <div key={storageLocation.id}>
                         <StorageComponent storageLocation={storageLocation}/>
-                        <button onClick={() => navigateTo("/storage/" + storageLocation.id)}>GO TO</button>
                     </div>
                 ))}
             </List>
 
 
             <form onSubmit={handleSubmit}>
-                <TextField value={storageName} onChange={handleStorageLocation} label={"Storage"} size={"small"}/>
-                <Button variant={'contained'} size={'large'} type="submit">ADD</Button>
+                <input value={storageName} onChange={handleStorageLocation} placeholder={"Storage"}/>
+                <button type="submit">ADD</button>
             </form>
             <button onClick={() => navigateTo("/")}>Back</button>
         </>

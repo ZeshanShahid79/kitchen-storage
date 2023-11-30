@@ -1,5 +1,6 @@
 import {Box} from "@mui/material";
 import {StorageLocation} from "../StorageLocation.ts";
+import {useNavigate} from "react-router";
 
 
 type Props = {
@@ -7,14 +8,13 @@ type Props = {
 };
 
 function StorageComponent(props: Props) {
-
-
+    const navigateTo = useNavigate()
+    const amount: string = props.storageLocation.products ? props.storageLocation.products.length.toString() : "0"
     return (
         <Box sx={{border: 1, m: 2, p: 2}}>
             <p>{props.storageLocation.storageName}</p>
-            {props.storageLocation.products.map((product) => (
-                <p key={product.id}>{product.productName}</p>
-            ))}
+            <p>{"Items: " + amount}</p>
+            <button onClick={() => navigateTo("/storage/" + props.storageLocation.id)}>GO TO</button>
         </Box>
     );
 }

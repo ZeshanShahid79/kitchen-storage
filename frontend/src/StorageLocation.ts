@@ -1,9 +1,9 @@
-import {Product} from "./Product.ts";
+import {AddProductRequest, Product} from "./Product.ts";
 
 export type StorageLocation = {
     id: string
     storageName: string
-    products: Product[]
+    products: (AddProductRequest)[]
 }
 
 export type AddStorageLocationRequest = {

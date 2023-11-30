@@ -7,7 +7,7 @@ import java.util.List;
 
 public record StorageLocationRequest(
         String storageName,
-        List<Product> productList
+        List<Product> products
 
 ) {
 }
