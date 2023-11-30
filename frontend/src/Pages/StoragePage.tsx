@@ -55,7 +55,7 @@ function StoragePage(props: Props) {
 
             <form onSubmit={handleSubmit}>
                 <input value={storageName} onChange={handleStorageLocation} placeholder={"Storage"}/>
-                <button type="submit">ADD</button>
+                <button type="submit">Add</button>
             </form>
             <button onClick={() => navigateTo("/")}>Back</button>
         </>
